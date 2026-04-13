@@ -9,6 +9,7 @@ package biblioteca;
 public class Libro {
 
     // attributi
+    private final String ISBN;    // utilizzato per identificare in modo univoco un libro
     private String titolo;
     private String autore;
     private int numeroPagine;
@@ -16,8 +17,9 @@ public class Libro {
     private Genere genere;
 
     // costruttori
-    public Libro(String titolo, String autore, int numeroPagine, boolean disponibile, Genere genere) throws Exception {
+    public Libro(String ISBN, String titolo, String autore, int numeroPagine, boolean disponibile, Genere genere) throws Exception {        
         try {
+            this.ISBN = ISBN;
             setAutore(autore);
             setDisponibile(disponibile);
             setGenere(genere);
@@ -41,6 +43,11 @@ public class Libro {
 
     public String getAutore() {
         return autore;
+    }
+
+    public String getISBN()
+    {
+        return ISBN;
     }
 
     public void setAutore(String autore) throws Exception {
@@ -79,7 +86,7 @@ public class Libro {
     // to string
     @Override
     public String toString() {
-        return "Libro{" + "titolo=" + titolo + ", autore=" + autore + ", numeroPagine=" + numeroPagine + ", disponibile=" + disponibile + ", genere=" + genere + '}';
+        return "Libro{ISBN="+this.ISBN + ", titolo=" + titolo + ", autore=" + autore + ", numeroPagine=" + numeroPagine + ", disponibile=" + disponibile + ", genere=" + genere + '}';
     }
 
     // altri metodi
@@ -101,5 +108,43 @@ public class Libro {
     public void restituisciLibro(){
         this.disponibile = true;
     }
-            
+           
+    
+    @Override
+    public boolean equals(Object obj) {
+        
+        // se gli indirizzi dell'oggetto corrente e del parametro obj sono uguali
+        // vuol dire che puntano allo stesso oggetto (libro)
+        if (this == obj) {
+            return true;
+        }
+
+        // se l'oggetto che vuoi confrontare con this è nullo,
+        // sicuramente sarà diverso da this
+        if (obj == null) {
+            return false;
+        }
+
+        // se il parametro obj appartiene ad una classe
+        // diversa da quella dell'oggetto corrente this (di tipo Libro), 
+        // sicuramente, i due oggetti saranno diversi
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        // se arrivo qui, this e obj contengono riferimenti ad oggetti di tipo Libro
+        // faccio diventare l'oggetto referenziato tramite obj di tipo Libro
+        Libro altroLibro = (Libro)obj;
+
+        /*if (this.getISBN().equals(altroLibro.getISBN())) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }*/
+
+        return this.getISBN().equals(altroLibro.getISBN());
+    }
+
 }
