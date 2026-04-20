@@ -64,4 +64,98 @@ public class CollezioneLibri {
 
         return -1;
     }
+
+
+    public boolean remove(Libro libro)
+    {
+        // se non ho un libro, non posso eliminarlo
+        if (libro == null) {
+            return false;
+        }
+
+        // cerco la posizione del libro da eliminare
+        int indexLibro = indexOf(libro);
+
+        // se il libro non esiste (cioè ha un indice negativo),
+        // non posso eliminarlo: il metodo termina restituendo false
+        if (indexLibro<0) {
+            return false;
+        }
+
+        // se arrivo qui, il libro esiste e ha un dato indice
+        // faccio lo shift a sinistra
+
+        for (int i = indexLibro; i < count-1; i++) {
+            collezione[i] = collezione[i+1];
+        }
+
+        // per evitare problemi di memory leak,
+        // imposto a null il valore dell'ultima posizione della collezione
+        // in cui stava l'elemento che ho spostato
+        collezione[count-1] = null;
+
+        // diminuisco il numero di elementi da considerare
+        count--;
+        
+        return true;
+
+    }
+
+    public boolean removeNoOrder(Libro libro)
+    {
+        // se non ho un libro, non posso eliminarlo
+        if (libro == null) {
+            return false;
+        }
+
+        // cerco la posizione del libro da eliminare
+        int indexLibro = indexOf(libro);
+
+        // se il libro non esiste (cioè ha un indice negativo),
+        // non posso eliminarlo: il metodo termina restituendo false
+        if (indexLibro<0) {
+            return false;
+        }
+
+        // se arrivo qui, il libro esiste e ha un dato indice
+
+        // copio l'ultimo libro nella posizione del libro da eliminare 
+        collezione[indexLibro] = collezione[count-1];
+        
+        // per evitare problemi di memory leak,
+        // imposto a null il valore dell'ultima posizione della collezione
+        // in cui stava l'elemento che ho spostato
+        collezione[count-1] = null;
+
+        // diminuisco il numero di elementi da considerare
+        count--;
+        
+        return true;
+    }
+
+
+    public boolean contains(Libro libro){
+
+    }
+
+    public Libro getLibro(int index){
+
+    }
+
+    // restituisce il primo libro che incontra che ha il maggior numero di pagine
+    public Libro libroPiuLungo(){
+
+    }
+
+    // restituisce i libri che hanno il maggior numero di pagine
+    public Libro[] libriPiuLunghi(){
+        
+    }
+
+    // unisce, senza duplicati, la collezione passata come parametro
+    // alla collezione della classe
+    public CollezioneLibri unione(CollezioneLibri altraCollezione){
+
+    }
+
 }
